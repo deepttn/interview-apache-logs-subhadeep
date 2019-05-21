@@ -1,0 +1,13 @@
+Total Requests: 26065
+Total Data transmitted: 121.9GiB
+Most requested resource: /Pics/3.jpg
+Total requests for /Pics/3.jpg: 2948
+Percentage of requests for /Pics/3.jpg: 11.3101860733
+Remote host with the most requests: localhost
+Total requests from localhost: 8736
+Percentage of requests from localhost: 33.5162094763
+Percentage of 1xx requests: 20.4258584308
+Percentage of 2xx requests: 20.5332821792
+Percentage of 3xx requests: 20.0153462498
+Percentage of 4xx requests: 18.9142528295
+Percentage of 5xx requests: 20.1112603108
