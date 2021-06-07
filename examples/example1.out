@@ -1,13 +1,13 @@
-Total Requests: 31863
-Total Data transmitted: 148.1GiB
-Most requested resource: /Pics/3.jpg
-Total requests for /Pics/3.jpg: 3652
-Percentage of requests for /Pics/3.jpg: 11.4615698459
+Total Requests: 220
+Total Data transmitted: 1.1GiB
+Most requested resource: /media//1.ts
+Total requests for /media//1.ts: 33
+Percentage of requests for /media//1.ts: 15.0000000000
 Remote host with the most requests: example.com
-Total requests from example.com: 10642
-Percentage of requests from example.com: 33.3992404984
-Percentage of 1xx requests: 20.1926999969
-Percentage of 2xx requests: 20.3088221448
-Percentage of 3xx requests: 20.2899915262
-Percentage of 4xx requests: 18.7396039293
-Percentage of 5xx requests: 20.4688824028
+Total requests from  example.com: 79
+Percentage of requests from example.com: 35.9090909091
+Percentage of 1xx requests: 18.6363636364
+Percentage of 2xx requests: 22.7272727273
+Percentage of 3xx requests: 20.0000000000
+Percentage of 4xx requests: 18.6363636364
+Percentage of 5xx requests: 20.0000000000

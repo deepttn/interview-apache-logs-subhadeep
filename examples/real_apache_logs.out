@@ -1,0 +1,13 @@
+Total Requests: 10000
+Total Data transmitted: 2.6GiB
+Most requested resource: /favicon.ico
+Total requests for /favicon.ico: 807
+Percentage of requests for /favicon.ico: 8.0700000000
+Remote host with the most requests: 66.249.73.135
+Total requests from  66.249.73.135: 482
+Percentage of requests from 66.249.73.135: 4.8200000000
+Percentage of 1xx requests: 0.0000000000
+Percentage of 2xx requests: 91.7100000000
+Percentage of 3xx requests: 6.0900000000
+Percentage of 4xx requests: 2.1700000000
+Percentage of 5xx requests: 0.0300000000
