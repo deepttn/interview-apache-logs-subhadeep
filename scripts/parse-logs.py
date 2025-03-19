@@ -3,7 +3,9 @@ import argparse
 from collections import Counter, defaultdict
 
 def parse_log_line(line):
-    log_pattern = re.compile(r'(?P<remote_host>\S+) \S+ \S+ \[.*?\] "\S+ (?P<resource>\S+) .*?" (?P<status_code>\d+) (?P<bytes>\d+|-)')
+    log_pattern = re.compile(
+        r'(?P<remote_host>\S+) \S+ \S+ \[(?P<timestamp>.*?)\] "(?P<method>\S+) (?P<resource>\S+).*?" (?P<status_code>\d+) (?P<bytes>\d+|-)'
+    )
     match = log_pattern.match(line)
     if match:
         return {
@@ -30,6 +32,10 @@ def analyze_log(file_path):
                 resource_counter[parsed['resource']] += 1
                 host_counter[parsed['remote_host']] += 1
                 status_counter[parsed['status_code'] // 100] += 1
+    
+    if total_requests == 0:
+        print("No valid log entries found.")
+        return
     
     most_requested_resource, most_requested_count = resource_counter.most_common(1)[0]
     most_active_host, most_host_requests = host_counter.most_common(1)[0]
