@@ -19,6 +19,7 @@ class Generate:
         # Generic and valid remote hosts
         hosts = [
             '127.0.0.1',
+            '34.239.134.59',
             'example.com',
             'localhost'
         ]
