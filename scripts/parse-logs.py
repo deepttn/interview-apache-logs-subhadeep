@@ -10,15 +10,20 @@ OUTPUT_FILE = "parsed_results.txt"
 
 def parse_log_line(line):
     log_pattern = re.compile(
-        r'(?P<remote_host>\S+) \S+ \S+ \[(?P<timestamp>.*?)\] "(?P<method>\S+) (?P<resource>\S+).*?" (?P<status_code>\d+) (?P<bytes>\d+|-)'
+        r'(?P<remote_host>\S+) \S+ \S+ \[(?P<timestamp>.*?)\] "(?P<method>\S+) (?P<resource>\S+) (?P<protocol>HTTP/\d\.\d)" (?P<status_code>\d+) (?P<bytes>\d+|-) "(?P<referrer>.*?)" "(?P<user_agent>.*?)"'
     )
     match = log_pattern.match(line)
     if match:
         return {
             'remote_host': match.group('remote_host'),
+            'timestamp': match.group('timestamp'),
+            'method': match.group('method'),
             'resource': match.group('resource'),
+            'protocol': match.group('protocol'),
             'status_code': int(match.group('status_code')),
-            'bytes': int(match.group('bytes')) if match.group('bytes') != '-' else 0
+            'bytes': int(match.group('bytes')) if match.group('bytes') != '-' else 0,
+            'referrer': match.group('referrer'),
+            'user_agent': match.group('user_agent')
         }
     return None
 
@@ -29,15 +34,20 @@ def save_to_db(data):
         CREATE TABLE IF NOT EXISTS log_analysis (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             remote_host TEXT,
+            timestamp TEXT,
+            method TEXT,
             resource TEXT,
+            protocol TEXT,
             status_code INTEGER,
-            bytes_sent INTEGER
+            bytes_sent INTEGER,
+            referrer TEXT,
+            user_agent TEXT
         )
     """)
     cursor.execute("""
-        INSERT INTO log_analysis (remote_host, resource, status_code, bytes_sent)
-        VALUES (?, ?, ?, ?)
-    """, (data['remote_host'], data['resource'], data['status_code'], data['bytes']))
+        INSERT INTO log_analysis (remote_host, timestamp, method, resource, protocol, status_code, bytes_sent, referrer, user_agent)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (data['remote_host'], data['timestamp'], data['method'], data['resource'], data['protocol'], data['status_code'], data['bytes'], data['referrer'], data['user_agent']))
     conn.commit()
     conn.close()
 
@@ -57,7 +67,7 @@ def analyze_log(file_path):
                 resource_counter[parsed['resource']] += 1
                 host_counter[parsed['remote_host']] += 1
                 status_counter[parsed['status_code'] // 100] += 1
-                save_to_db(parsed)  # Store each log in database
+                save_to_db(parsed)  # Store each log in the database
 
     if total_requests == 0:
         print("No valid log entries found.")
